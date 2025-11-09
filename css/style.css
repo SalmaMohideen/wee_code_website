@@ -67,6 +67,7 @@ body {
 
 .nav-menu li {
     margin: 0;
+    position: relative;
 }
 
 .nav-link {
@@ -79,14 +80,77 @@ body {
     font-size: 28px;
     transition: all 0.3s ease;
     position: relative;
+    cursor: default;
 }
 
 .nav-link:hover {
     color: #6a9a23;
 }
 
+.nav-link[href]:hover {
+    cursor: pointer;
+}
+
 /* Active/Selected Menu Item */
 .nav-link.active {
+    color: var(--orange);
+}
+
+/* Dropdown Menu */
+.dropdown {
+    position: relative;
+}
+
+.dropdown .nav-link::after {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid currentColor;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    margin-bottom: 2px;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+    min-width: 350px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    border-radius: 4px;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-link {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    color: var(--green);
+    font-family: 'Calistoga', serif;
+    font-weight: 400;
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-link:hover {
+    background-color: rgba(138, 192, 46, 0.1);
     color: var(--orange);
 }
 
@@ -95,8 +159,8 @@ main {
     min-height: calc(100vh - 100px);
     padding: 2rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 .content {
@@ -111,7 +175,7 @@ main {
     align-items: center;
     justify-content: center;
     padding: 4rem 2rem;
-    min-height: calc(100vh - 200px);
+    min-height: 60vh;
 }
 
 .hero-box {
@@ -153,8 +217,20 @@ main {
 .hero-line-small {
     display: block;
     font-size: 80px;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1;
+    text-align: center;
+    width: 100%;
+}
+
+.hero-line-white {
+    display: block;
+    font-size: 160px;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
 }
 
 .hero-line-code {
@@ -179,6 +255,100 @@ main {
     font-family: 'Adobe Caslon Pro', 'Caslon', 'Cormorant', 'Times New Roman', Times, serif;
     font-weight: 600;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Sign Up Section */
+.signup-section {
+    padding: 2rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.signup-header {
+    font-family: 'Calistoga', serif;
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #333;
+}
+
+.course-boxes {
+    display: flex;
+    gap: 2rem;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.course-box {
+    border: 2px solid #999;
+    border-radius: 8px;
+    padding: 2.5rem;
+    flex: 1;
+    min-width: 500px;
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.course-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.course-title {
+    font-family: 'Calistoga', serif;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    white-space: nowrap;
+}
+
+.course-title.orange {
+    color: var(--orange);
+}
+
+.course-description {
+    font-family: 'Cormorant', serif;
+    font-size: 24px;
+    color: var(--blue);
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+
+.signup-btn {
+    background-color: var(--orange);
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    font-family: 'Calistoga', serif;
+    font-size: 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.signup-btn:hover,
+.signup-btn:active {
+    background-color: var(--green);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.arrow {
+    font-size: 28px;
+    line-height: 1;
 }
 
 /* Responsive Design */
@@ -208,6 +378,21 @@ main {
         font-size: 24px;
     }
     
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        margin-top: 0.5rem;
+        padding: 0;
+    }
+    
+    .dropdown-link {
+        font-size: 20px;
+        padding: 0.5rem 1rem;
+    }
+    
     .hero-box {
         padding: 3rem 2rem;
         width: 95%;
@@ -225,6 +410,10 @@ main {
         font-size: 35px;
     }
     
+    .hero-line-white {
+        font-size: 60px;
+    }
+    
     .hero-line-code {
         font-size: 60px;
         padding: 0.15em 0.4em;
@@ -232,6 +421,38 @@ main {
     
     .hero-highlight {
         padding: 0.1em 0.3em;
+    }
+    
+    .signup-section {
+        padding: 2rem 1rem;
+    }
+    
+    .signup-header {
+        font-size: 36px;
+        margin-bottom: 2rem;
+    }
+    
+    .course-boxes {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .course-box {
+        min-width: 100%;
+        padding: 2rem;
+    }
+    
+    .course-title {
+        font-size: 28px;
+    }
+    
+    .course-description {
+        font-size: 20px;
+    }
+    
+    .signup-btn {
+        font-size: 20px;
+        padding: 0.75rem 1.5rem;
     }
 }
 
